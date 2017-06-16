@@ -180,12 +180,13 @@ export default class ReactMapboxGl extends React.Component<Props & Events, State
       logoPosition
     });
 
-    if (fitBounds) {
-      map.fitBounds(fitBounds, fitBoundsOptions);
-    }
-
     map.on('load', (evt: React.SyntheticEvent<any>) => {
       this.setState({ map });
+
+        if (fitBounds) {
+          map.fitBounds(fitBounds, {...fitBoundsOptions, duration: 0});
+        }
+
 
       if (onStyleLoad) {
         onStyleLoad(map, evt);
